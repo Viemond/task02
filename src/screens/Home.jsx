@@ -24,7 +24,6 @@ export default function Home() {
         <Image source={require("../../assets/Small_Logo.png")} />
         <View style={{ flexDirection: "row", alignItems: "center" }}>
           <SearchBar />
-
           <TouchableOpacity>
             <Image source={require("../../assets/Notification.png")} />
           </TouchableOpacity>

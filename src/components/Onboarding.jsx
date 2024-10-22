@@ -16,6 +16,8 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useNavigation } from "@react-navigation/native";
 import { useFonts } from "expo-font";
 
+const { width, height } = Dimensions.get("window");
+
 export default function Onboarding({ setOnboarding }) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const scrollX = useRef(new Animated.Value(0)).current;
@@ -24,18 +26,9 @@ export default function Onboarding({ setOnboarding }) {
   const viewableItemsChanged = useRef(({ viewableItems }) => {
     setCurrentIndex(viewableItems[0].index);
   }).current;
-  const { width, height } = Dimensions.get("window");
   const [fontsLoaded] = useFonts({
     "Poppins-Medium": require("../../assets/fonts/Poppins-Medium.ttf"),
   });
-
-  // if (!fontsLoaded) {
-  //   return (
-  //     <View style={styles.loadingContainer}>
-  //       <ActivityIndicator size="large" />
-  //     </View>
-  //   );
-  // }
 
   const viewConfig = useRef({ viewAreaCoveragePercentThreshold: 50 }).current;
 
@@ -43,8 +36,6 @@ export default function Onboarding({ setOnboarding }) {
     try {
       await AsyncStorage.setItem("@viewedOnboarding", "true");
       setOnboarding(true);
-      // const value = await AsyncStorage.getItem("@viewedOnboarding");
-      // console.log("AsyncStorage value:", value);
       navigation.replace("Navigation");
     } catch (error) {
       console.log(error);
@@ -58,22 +49,9 @@ export default function Onboarding({ setOnboarding }) {
         style={styles.skipButton}
         onPress={handleSkip}
       >
-        <Text
-          style={{
-            color: "#061023",
-            fontSize: 16,
-            fontWeight: "medium",
-            fontFamily: "Poppins-Medium",
-            // padding: 10,
-            // position: "absolute",
-            // left: 130,
-            // top: 5,
-          }}
-        >
-          Skip
-        </Text>
+        <Text style={styles.skipButtonText}>Skip</Text>
       </TouchableOpacity>
-      <View style={{ flex: 3 }}>
+      <View style={styles.flatListContainer}>
         <FlatList
           data={slides}
           renderItem={({ item }) => <OnboardingItem item={item} />}
@@ -96,10 +74,7 @@ export default function Onboarding({ setOnboarding }) {
       </View>
       <ImageBackground
         source={require("../../assets/Subtract (1).png")}
-        style={{
-          width: width,
-          alignItems: "center",
-        }}
+        style={styles.imageBackground}
       >
         <Paginator data={slides} scrollX={scrollX} />
       </ImageBackground>
@@ -115,12 +90,22 @@ const styles = StyleSheet.create({
     backgroundColor: "#f9f8f8",
   },
   skipButton: {
-    // position: "absolute",
-    // right: 10,
-    // top: 10,
     paddingTop: 15,
-    paddingRight: 15,
+    paddingRight: 30,
     zIndex: 1,
     marginLeft: "auto",
+  },
+  skipButtonText: {
+    color: "#061023",
+    fontSize: 16,
+    fontWeight: "medium",
+    fontFamily: "Poppins-Medium",
+  },
+  flatListContainer: {
+    flex: 3,
+  },
+  imageBackground: {
+    width: width,
+    alignItems: "center",
   },
 });

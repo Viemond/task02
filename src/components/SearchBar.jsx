@@ -27,12 +27,12 @@ export default function SearchBar() {
 
   const inputWidth = animation.interpolate({
     inputRange: [0, 1],
-    outputRange: [0, 250], // Input starts hidden and expands fully
+    outputRange: [0, 200],
   });
 
   const iconOpacity = animation.interpolate({
     inputRange: [0, 1],
-    outputRange: [1, 0], // Icon fades out when expanding
+    outputRange: [1, 0],
   });
 
   return (
