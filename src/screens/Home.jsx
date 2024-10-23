@@ -182,7 +182,7 @@ const styles = StyleSheet.create({
   },
   seeAll: {
     color: "#FF0000",
-    fontSize: 12,
+    fontSize: 13,
     fontWeight: "500",
     fontFamily: "Poppins-Medium",
     marginLeft: "auto",
@@ -192,5 +192,10 @@ const styles = StyleSheet.create({
     alignItems: "center",
     marginRight: 15,
     gap: 5,
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.5,
+    elevation: 5,
   },
 });
