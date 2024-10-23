@@ -17,10 +17,14 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { getToken, logout } from "../auth/auth";
 import Login from "../components/Login";
 import AnimatedButton from "../components/AnimatedButton";
+import { useFonts } from "expo-font";
 
 export default function BottomNavigation() {
   const Tab = createBottomTabNavigator();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [fontsLoaded] = useFonts({
+    "Poppins-Medium": require("../../assets/fonts/Poppins-Medium.ttf"),
+  });
 
   const clearOnboarding = async () => {
     try {
@@ -53,8 +57,8 @@ export default function BottomNavigation() {
             <AnimatedButton />
           </TouchableOpacity>
 
-          <Button title="Clear onboarding (test)" onPress={clearOnboarding} />
-          <Button title="Sign out (test)" onPress={signOut} />
+          {/* <Button title="Clear onboarding (test)" onPress={clearOnboarding} />
+          <Button title="Sign out (test)" onPress={signOut} /> */}
 
           <Tab.Navigator
             screenOptions={{
@@ -71,11 +75,13 @@ export default function BottomNavigation() {
               options={{
                 tabBarIcon: ({ focused }) => (
                   <View style={styles.iconContainer}>
-                    <MaterialIcons
-                      name="home"
-                      size={34}
-                      color={focused ? "white" : "#696c71"}
-                    />
+                    {focused ? (
+                      <Image
+                        source={require("../../assets/Home_focused.png")}
+                      />
+                    ) : (
+                      <Image source={require("../../assets/Home.png")} />
+                    )}
                   </View>
                 ),
                 tabBarLabel: ({ focused }) => (
@@ -96,11 +102,13 @@ export default function BottomNavigation() {
               options={{
                 tabBarIcon: ({ focused }) => (
                   <View style={[styles.iconContainer, { marginRight: 50 }]}>
-                    <MaterialIcons
-                      name="favorite"
-                      size={34}
-                      color={focused ? "white" : "#696c71"}
-                    />
+                    {focused ? (
+                      <Image
+                        source={require("../../assets/Heart_focused.png")}
+                      />
+                    ) : (
+                      <Image source={require("../../assets/Heart.png")} />
+                    )}
                   </View>
                 ),
                 tabBarLabel: ({ focused }) => (
@@ -122,11 +130,13 @@ export default function BottomNavigation() {
               options={{
                 tabBarIcon: ({ focused }) => (
                   <View style={[styles.iconContainer, { marginLeft: 50 }]}>
-                    <MaterialIcons
-                      name="directions-car"
-                      size={34}
-                      color={focused ? "white" : "#696c71"}
-                    />
+                    {focused ? (
+                      <Image
+                        source={require("../../assets/MyCar_focused.png")}
+                      />
+                    ) : (
+                      <Image source={require("../../assets/MyCar.png")} />
+                    )}
                   </View>
                 ),
                 tabBarLabel: ({ focused }) => (
@@ -181,8 +191,8 @@ const styles = StyleSheet.create({
     position: "absolute",
     bottom: 45,
     alignSelf: "center",
-    width: 60,
-    height: 60,
+    width: 50,
+    height: 50,
     borderRadius: 30,
     borderColor: "white",
     backgroundColor: "#b9271b",
@@ -199,19 +209,22 @@ const styles = StyleSheet.create({
   tabBar: {
     backgroundColor: "#050a13",
     borderRadius: 25,
-    height: 80,
+    height: 68,
     margin: 5,
     position: "absolute",
   },
   iconContainer: {
     width: 65,
     height: 50,
-    padding: 5,
+    // padding: 5,
+    marginTop: 5,
     justifyContent: "center",
     alignItems: "center",
   },
   label: {
-    fontSize: 14,
+    fontSize: 10,
+    fontWeight: "500",
     paddingBottom: 10,
+    fontFamily: "Poppins-Medium",
   },
 });

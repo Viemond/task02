@@ -15,8 +15,8 @@ const AnimatedButton = () => {
     "Poppins-Medium": require("../../assets/fonts/Poppins-Medium.ttf"),
   });
 
-  const rotation = useRef(new Animated.Value(0)).current; // Rotation value
-  const popupOpacity = useRef(new Animated.Value(0)).current; // Opacity for pop-up
+  const rotation = useRef(new Animated.Value(0)).current;
+  const popupOpacity = useRef(new Animated.Value(0)).current;
 
   const toggleAnimation = () => {
     const toValue = isOpen ? 0 : 1;
@@ -94,15 +94,15 @@ const styles = StyleSheet.create({
     position: "relative",
   },
   button: {
-    width: 50,
-    height: 50,
+    width: 48,
+    height: 48,
     justifyContent: "center",
     alignItems: "center",
   },
   line: {
     position: "absolute",
-    width: 30,
-    height: 3,
+    width: 20,
+    height: 2,
     backgroundColor: "white",
   },
   popup: {
